@@ -47,6 +47,14 @@ function benchmark {
   # capture application startup time
   sudo sh -c "grep 'Server startup' $TOMCAT_HOME/logs/catalina.*.log" | sed 's/.* \([0-9]* ms\)/\1/' > results/$run_name/application-startup
 
+  # capture memory
+  tomcat_pid=`sudo -u tomcat jps | grep Bootstrap | awk '{print $1}'`
+  for j in {1..5}
+  do
+    sudo -u tomcat jcmd $tomcat_pid GC.run
+  done
+  sudo -u tomcat jstat -gc $tomcat_pid | grep -v OU | awk '{print $8}' > results/$run_name/memory-footprint
+
   start_cpu_time=`head -1 /proc/stat | awk '{print $2 + $3 + $4}'`
   start_time=`date +%s`
   echo "running $RUN_USERS user(s) $run_duration seconds ..."

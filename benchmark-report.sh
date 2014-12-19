@@ -64,4 +64,14 @@ do
   done | sort -n | awk '{a[NR-1] = $1} END { printf "%d ", a[int(NR*0.5-0.5)] }'
 done | awk '{ printf "application startup       %9d ms%9d ms%10.1f %%\n", $1, $2, 100*($2-$1)/$1 }'
 
+# memory footprint
+printf "\n"
+for run in "baseline" "glowroot"
+do
+  for ((i = 1; i <= $run_iterations; i++))
+  do
+    cat results/$run-$i/memory-footprint
+  done | sort -n | awk '{a[NR-1] = $1} END { printf "%d ", a[int(NR*0.5-0.5)] }'
+done | awk '{ printf "memory footprint          %9d kb%9d kb%10.1f %%\n", $1, $2, 100*($2-$1)/$1 }'
+
 printf "==============================================================\n\n"
