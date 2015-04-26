@@ -27,12 +27,12 @@
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-core</artifactId>
-      <version>0.8.0</version>
+      <version>0.8.1</version>
     </dependency>
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-hibernate</artifactId>
-      <version>0.8.0</version>
+      <version>0.8.1</version>
     </dependency>
     <dependency>
       <!-- force more recent hibernate version than provided by dropwizard 0.8.0 for https://hibernate.atlassian.net/browse/HHH-9500 -->
@@ -43,22 +43,22 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-      <version>1.4.186</version>
+      <version>1.4.187</version>
     </dependency>
     <dependency>
       <groupId>com.ning</groupId>
       <artifactId>async-http-client</artifactId>
-      <version>1.9.17</version>
+      <version>1.9.20</version>
     </dependency>
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
       <artifactId>jmh-core</artifactId>
-      <version>1.9</version>
+      <version>1.9.1</version>
     </dependency>
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
       <artifactId>jmh-generator-annprocess</artifactId>
-      <version>1.9</version>
+      <version>1.9.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
