@@ -17,7 +17,6 @@ package com.example.helloworld;
 
 import com.example.helloworld.core.Person;
 import com.example.helloworld.db.PersonDAO;
-import com.example.helloworld.resources.HelloWorldResource;
 import com.example.helloworld.resources.PeopleResource;
 import com.example.helloworld.resources.PersonResource;
 import io.dropwizard.Application;
@@ -48,7 +47,6 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void run(HelloWorldConfiguration configuration, Environment environment) {
         PersonDAO dao = new PersonDAO(hibernateBundle.getSessionFactory());
-        environment.jersey().register(new HelloWorldResource());
         environment.jersey().register(new PeopleResource(dao));
         environment.jersey().register(new PersonResource(dao));
     }

@@ -19,14 +19,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "people")
-@NamedQueries({@NamedQuery(name = "com.example.helloworld.core.Person.findAll",
-        query = "SELECT p FROM Person p")})
 public class Person {
 
     @Id
