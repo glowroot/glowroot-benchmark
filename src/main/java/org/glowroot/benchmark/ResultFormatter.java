@@ -51,21 +51,27 @@ public class ResultFormatter {
                 continue;
             }
             ObjectNode scorePercentiles = (ObjectNode) primaryMetric.get("scorePercentiles");
+            double score50 = scorePercentiles.get("50.0").asDouble();
             double score95 = scorePercentiles.get("95.0").asDouble();
             double score99 = scorePercentiles.get("99.0").asDouble();
             double score999 = scorePercentiles.get("99.9").asDouble();
+            double score9999 = scorePercentiles.get("99.99").asDouble();
             double allocatedBytes = getAllocatedBytes(result);
             if (benchmark.equals(ServletBenchmark.class.getName())) {
                 scores.baselineResponseTimeAvg = score;
+                scores.baselineResponseTime50 = score50;
                 scores.baselineResponseTime95 = score95;
                 scores.baselineResponseTime99 = score99;
                 scores.baselineResponseTime999 = score999;
+                scores.baselineResponseTime9999 = score9999;
                 scores.baselineAllocatedBytes = allocatedBytes;
             } else if (benchmark.equals(ServletWithGlowrootBenchmark.class.getName())) {
                 scores.glowrootResponseTimeAvg = score;
+                scores.glowrootResponseTime50 = score50;
                 scores.glowrootResponseTime95 = score95;
                 scores.glowrootResponseTime99 = score99;
                 scores.glowrootResponseTime999 = score999;
+                scores.glowrootResponseTime9999 = score9999;
                 scores.glowrootAllocatedBytes = allocatedBytes;
             } else {
                 throw new AssertionError(benchmark);
@@ -98,14 +104,18 @@ public class ResultFormatter {
         System.out.format("%25s%14s%14s%n", "", "baseline", "glowroot");
         printLine("Response time (avg)", "us", scores.baselineResponseTimeAvg,
                 scores.glowrootResponseTimeAvg);
+        printLine("Response time (50th)", "us", scores.baselineResponseTime50,
+                scores.glowrootResponseTime50);
         printLine("Response time (95th)", "us", scores.baselineResponseTime95,
                 scores.glowrootResponseTime95);
         printLine("Response time (99th)", "us", scores.baselineResponseTime99,
                 scores.glowrootResponseTime99);
         printLine("Response time (99.9th)", "us", scores.baselineResponseTime999,
                 scores.glowrootResponseTime999);
+        printLine("Response time (99.99th)", "us", scores.baselineResponseTime9999,
+                scores.glowrootResponseTime9999);
         if (scores.baselineAllocatedBytes != -1 && scores.glowrootAllocatedBytes != -1) {
-            printLine("Allocated bytes", "kb", scores.baselineAllocatedBytes / 1024.0,
+            printLine("Allocation memory per req", "kb", scores.baselineAllocatedBytes / 1024.0,
                     scores.glowrootAllocatedBytes / 1024.0);
         }
         System.out.println();
@@ -119,14 +129,18 @@ public class ResultFormatter {
 
     private static class Scores {
         private double baselineResponseTimeAvg;
+        private double baselineResponseTime50;
         private double baselineResponseTime95;
         private double baselineResponseTime99;
         private double baselineResponseTime999;
+        private double baselineResponseTime9999;
         private double baselineAllocatedBytes;
         private double glowrootResponseTimeAvg;
+        private double glowrootResponseTime50;
         private double glowrootResponseTime95;
         private double glowrootResponseTime99;
         private double glowrootResponseTime999;
+        private double glowrootResponseTime9999;
         private double glowrootAllocatedBytes;
     }
 }
