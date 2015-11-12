@@ -58,7 +58,8 @@ public class ServletBenchmark {
         asyncHttpClient.preparePost("http://localhost:8080/people")
                 .setHeader("Content-Type", "application/json")
                 .setBody("{\"firstName\":\"abc\",\"lastName\":\"xyz\"}")
-                .execute().get();
+                .execute()
+                .get();
         asyncHttpClient.close();
         httpClient = new HttpClient("localhost", 8080, "/people/1");
     }
