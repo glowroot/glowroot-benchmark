@@ -1,7 +1,7 @@
 FROM azul/zulu-openjdk
 
 ENV MAVEN_MAJOR_VERSION 3
-ENV MAVEN_VERSION 3.3.1
+ENV MAVEN_VERSION 3.3.9
 
 # build and install benchmark
 COPY pom.xml /workspace/
@@ -9,7 +9,7 @@ COPY src /workspace/src/
 RUN apt-get update \
   && apt-get -y install curl git \
   && curl http://archive.apache.org/dist/maven/maven-$MAVEN_MAJOR_VERSION/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
-       | tar xzf - -C /usr/share \
+       | tar xz -C /usr/share \
   && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
   && (cd workspace && mvn package) \
@@ -24,7 +24,7 @@ RUN apt-get update \
 # install glowroot
 RUN apt-get update \
   && apt-get -y install curl unzip \
-  && curl -L https://github.com/glowroot/glowroot/releases/download/v0.8.5/glowroot-0.8.5-dist.zip > glowroot-dist.zip \
+  && curl -L https://github.com/glowroot/glowroot/releases/download/v0.8.6/glowroot-0.8.6-dist.zip > glowroot-dist.zip \
   && unzip glowroot-dist.zip \
   && rm glowroot-dist.zip \
   && apt-get -y purge --auto-remove curl unzip \
