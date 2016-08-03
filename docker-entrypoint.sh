@@ -12,7 +12,7 @@ if [[ -n $GLOWROOT_DIST_ZIP ]]; then
   unzip $GLOWROOT_DIST_ZIP
 fi
 
-echo '{"advanced":{"captureThreadInfo":false,"captureGcActivity":false}}' > glowroot/config.json
+echo '{"transactions":{"captureThreadStats":false}}' > glowroot/config.json
 
 java $HARNESS_JVM_ARGS -jar benchmarks.jar $JMH_ARGS -rf json -prof gc \
   -jvmArgs "$JVM_ARGS -Djava.security.egd=file:/dev/urandom -Djmh.shutdownTimeout=0 -Djmh.shutdownTimeout.step=0"

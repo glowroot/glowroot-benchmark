@@ -24,7 +24,7 @@ RUN apt-get update \
 # install glowroot
 RUN apt-get update \
   && apt-get -y install curl unzip \
-  && curl -L https://github.com/glowroot/glowroot/releases/download/v0.8.6/glowroot-0.8.6-dist.zip > glowroot-dist.zip \
+  && curl -L https://github.com/glowroot/glowroot/releases/download/v0.9.0/glowroot-0.9.0-dist.zip > glowroot-dist.zip \
   && unzip glowroot-dist.zip \
   && rm glowroot-dist.zip \
   && apt-get -y purge --auto-remove curl unzip \
