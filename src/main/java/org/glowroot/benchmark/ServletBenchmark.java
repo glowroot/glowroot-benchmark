@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import com.example.helloworld.HelloWorldApplication;
-import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.AsyncHttpClientConfig;
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
@@ -51,10 +51,7 @@ public class ServletBenchmark {
 
     @Setup
     public void setup() throws Exception {
-        AsyncHttpClientConfig config = new AsyncHttpClientConfig.Builder()
-                .setAllowPoolingConnections(true)
-                .build();
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient(config);
+        AsyncHttpClient asyncHttpClient = new DefaultAsyncHttpClient();
         asyncHttpClient.preparePost("http://localhost:8080/people")
                 .setHeader("Content-Type", "application/json")
                 .setBody("{\"firstName\":\"abc\",\"lastName\":\"xyz\"}")

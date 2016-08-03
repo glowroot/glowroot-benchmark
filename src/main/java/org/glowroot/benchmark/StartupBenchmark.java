@@ -18,8 +18,9 @@ package org.glowroot.benchmark;
 import java.util.concurrent.TimeUnit;
 
 import com.example.helloworld.HelloWorldApplication;
-import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.Request;
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.DefaultAsyncHttpClient;
+import org.asynchttpclient.Request;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
@@ -43,7 +44,7 @@ public class StartupBenchmark {
 
     @Setup
     public void setup() throws Exception {
-        asyncHttpClient = new AsyncHttpClient();
+        asyncHttpClient = new DefaultAsyncHttpClient();
         request = asyncHttpClient.prepareGet("http://localhost:8080/hello-world").build();
     }
 
