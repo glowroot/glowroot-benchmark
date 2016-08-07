@@ -92,12 +92,11 @@ public class ResultFormatter {
         if (secondaryMetrics == null) {
             return -1;
         }
-        ObjectNode edenSpaceChurnNormalized =
-                (ObjectNode) secondaryMetrics.get("\u00b7gc.churn.PS_Eden_Space.norm");
-        if (edenSpaceChurnNormalized == null) {
+        ObjectNode gcAllocRateNorm = (ObjectNode) secondaryMetrics.get("\u00b7gc.alloc.rate.norm");
+        if (gcAllocRateNorm == null) {
             return -1;
         }
-        return edenSpaceChurnNormalized.get("score").asDouble();
+        return gcAllocRateNorm.get("score").asDouble();
     }
 
     private static void printScores(Scores scores) {
